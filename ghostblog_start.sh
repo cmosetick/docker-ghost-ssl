@@ -33,7 +33,12 @@ if [ ! -f ${ssl_key} ]; then
 fi
 
 if [ ! -f ${nginx_conf} ]; then
-    echo "Need to nginx conf file at ${nginx_conf}. Exiting."
+    echo "Need to add nginx conf file at ${nginx_conf}. Exiting."
+    exit 1
+fi
+
+if [ ! -f ${nginx_ssl_conf} ]; then
+    echo "Need to add nginx SSL conf file at ${nginx_ssl_conf}. Exiting."
     exit 1
 fi
 
