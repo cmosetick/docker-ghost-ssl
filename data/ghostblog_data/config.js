@@ -8,7 +8,7 @@ config = {
     // ### Development **(default)**
     development: {
         // The url to use when providing links to the site, E.g. in RSS and email.
-        url: 'https://vittegleo.com', 
+        url: 'http://opsdev.ws', 
         database: {
             client: 'sqlite3',
             connection: {
@@ -28,8 +28,10 @@ config = {
     // When running Ghost in the wild, use the production environment
     // Configure your URL and mail settings here
     production: {
-        url: 'https://vittegleo.com', 
+        url: 'http://opsdev.ws', 
         mail: {},
+	// #forceSSL added by Chris
+	forceAdminSSL: true,
         database: {
             client: 'sqlite3',
             connection: {
