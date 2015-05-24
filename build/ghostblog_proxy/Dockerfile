@@ -1,18 +1,20 @@
 # Pull base image.
 FROM ubuntu:14.04
 
-# Install basics
+# Do APT work first
 RUN \
+ #Use preferred Ubuntu mirror
+  sed -i 's@http://archive.ubuntu.com/ubuntu/@http://ubuntu.osuosl.org/ubuntu@g' /etc/apt/sources.list && \
   sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
   apt-get update && \
   apt-get -y upgrade && \
-  apt-get install -y build-essential && \
+#  apt-get install -y build-essential && \
   apt-get install -y software-properties-common && \
-  apt-get install -y byobu curl git htop man unzip wget
+  apt-get install -y curl wget git htop unzip man && \
+  add-apt-repository -y ppa:nginx/stable
 
-# Install Nginx
+# Install Nginx stable version from PPA
 RUN \
-  add-apt-repository -y ppa:nginx/stable && \
   apt-get update && \
   apt-get install -y nginx-full && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
