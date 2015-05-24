@@ -3,6 +3,7 @@ FROM ubuntu:14.04
 
 # Install basics
 RUN \
+  #Use preferred Ubuntu mirror or comment out for default
   sed -i 's@http://archive.ubuntu.com/ubuntu/@http://ubuntu.osuosl.org/ubuntu@g' /etc/apt/sources.list && \
   sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
   apt-get update && \
