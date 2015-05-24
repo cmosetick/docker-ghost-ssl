@@ -8,13 +8,13 @@ RUN \
   apt-get -y upgrade && \
   apt-get install -y build-essential && \
   apt-get install -y software-properties-common && \
-  apt-get install -y byobu curl git htop man unzip vim wget
+  apt-get install -y byobu curl git htop man unzip wget
 
 # Install Nginx
 RUN \
   add-apt-repository -y ppa:nginx/stable && \
   apt-get update && \
-  apt-get install -y nginx && \
+  apt-get install -y nginx-full && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx
 
