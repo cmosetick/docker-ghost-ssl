@@ -17,7 +17,6 @@ RUN apt-get install -y python python-dev python-pip python-virtualenv
 # Install Node.js stable from Ubuntu PPA
 # more info: https://launchpad.net/~chris-lea/+archive/ubuntu/node.js
 RUN \
-# Install Node.js from Ubuntu PPA
   add-apt-repository --yes ppa:chris-lea/node.js && \
   apt-get update && \
   apt-get install -y nodejs && \
@@ -36,6 +35,12 @@ RUN \
 #  CXX="g++ -Wno-unused-local-typedefs" make install && \
 #  cd /tmp && \
 #  rm -rf /tmp/node-v* && \
+
+#Debug npm
+RUN \
+  which npm > /tmp/npm-path.txt && \
+  npm --version >> /tmp/npm-path.txt && \
+  cat /tmp/npm-path.txt
 
 # Install Ghost
 RUN \
