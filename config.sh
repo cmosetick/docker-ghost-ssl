@@ -1,8 +1,8 @@
 #!/bin/bash
 
-ghostblog_image_name="9df8/ghostblog"
-ghostblog_container_name="ghostblog" 
-ghostblog_proxy_image_name="9df8/ghostblog_proxy"
+ghostblog_image_name="cmosetick/docker-ghost"
+ghostblog_container_name="ghostblog"
+ghostblog_proxy_image_name="cmosetick/nginx-ghost-ssl"
 ghostblog_proxy_container_name="ghostblog_proxy"
 
 data_folder="data"
