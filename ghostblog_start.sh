@@ -65,7 +65,7 @@ fi
 
 echo "Starting container ${ghostblog_container_name}"
 sleep 1
-start=$(docker run -d -p 2368 --name ${ghostblog_container_name} -v $(pwd)/${ghost_data_folder}:/ghost-override ${ghostblog_image_name})
+start=$(docker run -d ${auto_restart_policy} -p 2368 --name ${ghostblog_container_name} -v $(pwd)/${ghost_data_folder}:/ghost-override ${ghostblog_image_name})
 if [ $? -ne 0 ]; then
 	echo "Container ${ghostblog_container_name} failed to start. Exiting."
 	exit 1
@@ -73,7 +73,7 @@ fi
 
 echo "Starting container ${ghostblog_proxy_container_name}"
 sleep 1
-start=$(docker run -d -p 80:80 -p 443:443 --name ${ghostblog_proxy_container_name} --link ${ghostblog_container_name}:${ghostblog_container_name} -v $(pwd)/${cert_folder}:/etc/nginx/certificates -v $(pwd)/${nginx_sites_folder}:/etc/nginx/sites-enabled ${ghostblog_proxy_image_name})
+start=$(docker run -d ${auto_restart_policy} -p 80:80 -p 443:443 --name ${ghostblog_proxy_container_name} --link ${ghostblog_container_name}:${ghostblog_container_name} -v $(pwd)/${cert_folder}:/etc/nginx/certificates -v $(pwd)/${nginx_sites_folder}:/etc/nginx/sites-enabled ${ghostblog_proxy_image_name})
 if [ $? -ne 0 ]; then
 	echo "Container ${ghostblog_proxy_image_name} failed to start. Exiting."
 	exit 1
