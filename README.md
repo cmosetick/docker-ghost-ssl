@@ -1,6 +1,7 @@
 docker-ghost-ssl
 ================
-This project builds and deploys two [Docker](https://www.docker.com) containers that work together to serve [Ghost blog](https://github.com/tryghost/Ghost) content:  
+This project builds and deploys two production ready [Docker](https://www.docker.com)
+containers that work together to serve [Ghost blog](https://github.com/tryghost/Ghost) content:  
 * one with Ghost/Node.js  
 * the other with Nginx + SSL configured to proxy the content from the other container.
 
@@ -16,7 +17,8 @@ This project builds and deploys two [Docker](https://www.docker.com) containers 
 
 #### Import existing Ghost blog data (Optional)
 AFTER above clone step is complete  
-Put your Ghost data (contents directory) into data/ghostblog_data directory before starting containers with start script.
+Put your Ghost data (contents directory) into data/ghostblog_data directory before
+starting containers with start script.
 
 #### SSL Configuration
 * Copy SSL cert to data/certificates/server.crt
@@ -26,7 +28,9 @@ __!Be sure to NOT accidentally commit your certificate and key to a public sourc
 
 
 #### Starting blog
-Run the start script with your blog url like the example below. This will pull the latest images and start containers with appropriate port and volume mappings. If all goes well, your blog should be up and running.
+Run the start script with your blog url like the example below. This will pull the
+latest images and start containers with appropriate port and volume mappings.
+If all goes well, your blog should be up and running.
 
     ./ghostblog_start.sh http://mybloghere.com
 
@@ -44,6 +48,13 @@ In your browser vist: http://mybloghere.com to see HTTPS content
 vist: https://mybloghere.com/ghost to access the HTTPS admin area.
 
 
+### Further optimizations
+
+One can easily take this a step further by creating a free [Cloud Flare](https://www.cloudflare.com/plans)
+account and using that as CDN to offload some of the work that your Linux host has to do.  
+With this setup you would almost certainly be ready for the front page of Slashdot / Hacker News / Reddit.
+
+
 ### Goals and notes about this fork
 
 The main idea with this fork is to only serve the Ghost blog admin area over TLS/SSL.  
@@ -56,13 +67,19 @@ Other small adjustments have been made along the way including:
 
 * Using PPA's for Nginx and Node.js installation
 * Increasing maximum file upload size for Nginx.
+* Making sure that the containers are restarted upon host reboot
+  ^^ Important ^^
 
 The two major changes to make the admin area ONLY be served
-via TLS/SSL is to `nginx.conf` and `config.js`
+via TLS/SSL are to `nginx.conf` and `config.js`
 
-NOTE Currently this project will not work correctly for those wanting to try this on systems running [boot2docker](http://boot2docker.io/) on Mac or Windows. The main reason is because the port mapping will go to the Linux boot2docker host instead of your Mac/Windows system. Future updates to Docker / boot2docker may change this.
+NOTE Currently this project will not work correctly for those wanting to try this
+on systems running [boot2docker](http://boot2docker.io/) on Mac or Windows. The main
+reason is because the port mapping will go to the Linux boot2docker host instead of
+your Mac/Windows system. Future updates to Docker / boot2docker may change this.
 
-e.g. This is more for a __production run__ of Ghost running under Docker on bare metal or cloud based VM, than a local development environment.
+e.g. This is more for a __production run__ of Ghost running under Docker on bare metal
+or cloud based VM, than a local development environment.
 
 ### Docker Hub repositories
 Automated builds of the images have been configured in Docker Hub:
