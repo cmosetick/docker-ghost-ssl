@@ -23,7 +23,9 @@ starting containers with start script.
 #### SSL Configuration
 * Copy SSL cert to data/certificates/server.crt
 * Copy SSL private key to data/certificates/server.key  
-Best way to do this is to create symlinks to the actual file names that mean something to you.  
+FYI - Because of the way the Docker volumes work, symlinks to files will only work
+if the symlinks and target files are both in the data/certificates directory.  
+TL;DR do not use symlinks. Copy the files into this dir.  
 __!Be sure to NOT accidentally commit your certificate and key to a public source code repository!__
 
 
